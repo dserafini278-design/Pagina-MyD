@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marcos & Dante — Contenido que te trae clientes</title>
+<style>
+:root{--bg:#0b0b0d;--card:#16161a;--tx:#f4f4f5;--mut:#a1a1aa;--ac:#f5b400;--ac2:#ff6a00;--bd:#2a2a31;--btn-tx:#111;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#fafaf7;--card:#fff;--tx:#18181b;--mut:#52525b;--bd:#e4e4e7}}
+:root[data-theme="dark"]{--bg:#0b0b0d;--card:#16161a;--tx:#f4f4f5;--mut:#a1a1aa;--bd:#2a2a31}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+section{padding:64px 0}
+h1{font-size:clamp(30px,6vw,52px);line-height:1.1;margin:0 0 16px;font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(24px,4.5vw,36px);line-height:1.15;margin:0 0 10px;font-weight:800;letter-spacing:-.01em}
+em{font-style:normal;background:linear-gradient(90deg,var(--ac),var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mut);max-width:640px;margin:0 0 28px}
+.tag{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:12px;font-weight:700}
+.hero{text-align:center;padding-top:48px}
+.hero .sub{margin-left:auto;margin-right:auto}
+.btn{display:inline-block;background:linear-gradient(90deg,var(--ac),var(--ac2));color:var(--btn-tx);font-weight:800;text-decoration:none;padding:15px 28px;border-radius:12px;font-size:16px}
+.btn.o{background:none;border:2px solid var(--ac);color:var(--tx)}
+.vid{position:relative;aspect-ratio:16/9;background:var(--card);border:1px dashed var(--ac);border-radius:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:var(--mut);text-align:center;padding:16px;margin:0 auto 28px;max-width:860px}
+.vid.v{aspect-ratio:9/16;max-width:none;margin:0}
+.play{width:64px;height:64px;border-radius:50%;background:linear-gradient(90deg,var(--ac),var(--ac2));display:flex;align-items:center;justify-content:center}
+.play:after{content:"";border-left:20px solid #111;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.grid.v{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:22px}
+.card p{margin:0 0 14px}
+.who{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:14px}
+.av{width:40px;height:40px;border-radius:50%;background:var(--bd);flex:none}
+.st{color:var(--ac);letter-spacing:2px;margin-bottom:8px}
+.ph{font-size:12px;color:var(--ac);font-weight:700}
+.ft{display:flex;gap:12px;align-items:flex-start}
+.ft b{color:var(--ac);font-size:20px}
+.cta{text-align:center;background:var(--card);border-top:1px solid var(--bd)}
+.cta .row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+footer{text-align:center;color:var(--mut);font-size:13px;padding:28px 20px}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="w">
+  <div class="tag">Marcos &amp; Dante · Estrategia de contenido</div>
+  <h1>Convertí tu <em>Instagram</em> en una máquina de <em>clientes</em></h1>
+  <p class="sub">Hacemos los reels, las historias y la estrategia por vos, para que tu negocio deje de depender del boca a boca y empiece a atraer gente nueva todos los días. Sin anuncios.</p>
+  <!-- VIDEO PRINCIPAL: reemplazar este bloque por tu reproductor (YouTube, Vimeo, Loom, etc.) -->
+  <div class="vid"><div class="play"></div><b>VIDEO PRINCIPAL</b><span>Presentación de Marcos y Dante: quiénes somos, qué hacemos y cómo trabajamos (2-3 min)</span></div>
+  <a class="btn" href="#contacto">Quiero hablar con ellos</a>
+</div></header>
+
+<section><div class="w">
+  <div class="tag">Testimonios</div>
+  <h2>Lo que dicen <em>nuestros clientes</em></h2>
+  <p class="sub">Resultados reales de negocios reales.</p>
+  <div class="grid">
+    <div class="card"><div class="st">★★★★★</div><p>“[Pegá acá el testimonio del cliente 1: qué problema tenía y qué cambió con el contenido.]”</p><div class="who"><div class="av"></div><div><b>Nombre del cliente</b><br>Rubro · Ciudad</div></div><div class="ph">REEMPLAZAR</div></div>
+    <div class="card"><div class="st">★★★★★</div><p>“[Testimonio del cliente 2.]”</p><div class="who"><div class="av"></div><div><b>Nombre del cliente</b><br>Rubro · Ciudad</div></div><div class="ph">REEMPLAZAR</div></div>
+    <div class="card"><div class="st">★★★★★</div><p>“[Testimonio del cliente 3.]”</p><div class="who"><div class="av"></div><div><b>Nombre del cliente</b><br>Rubro · Ciudad</div></div><div class="ph">REEMPLAZAR</div></div>
+  </div>
+</div></section>
+
+<section style="background:var(--card)"><div class="w">
+  <div class="tag">Clientes en video</div>
+  <h2>Mirá lo que cuentan <em>en cámara</em></h2>
+  <p class="sub">Videos cortos de clientes contando su experiencia (formato vertical).</p>
+  <div class="grid v">
+    <div class="vid v"><div class="play"></div><b>VIDEO CLIENTE 1</b><span class="ph">REEMPLAZAR</span></div>
+    <div class="vid v"><div class="play"></div><b>VIDEO CLIENTE 2</b><span class="ph">REEMPLAZAR</span></div>
+    <div class="vid v"><div class="play"></div><b>VIDEO CLIENTE 3</b><span class="ph">REEMPLAZAR</span></div>
+  </div>
+</div></section>
+
+<section><div class="w">
+  <div class="tag">Reseñas</div>
+  <h2>Reseñas de <em>nuestro trabajo</em></h2>
+  <p class="sub">Capturas de mensajes, comentarios y reseñas de quienes ya trabajaron con nosotros.</p>
+  <div class="grid">
+    <div class="card"><div class="vid" style="aspect-ratio:4/3;margin:0 0 12px;max-width:none">Captura de WhatsApp / DM<br><span class="ph">REEMPLAZAR</span></div></div>
+    <div class="card"><div class="vid" style="aspect-ratio:4/3;margin:0 0 12px;max-width:none">Captura de reseña<br><span class="ph">REEMPLAZAR</span></div></div>
+    <div class="card"><div class="vid" style="aspect-ratio:4/3;margin:0 0 12px;max-width:none">Captura de comentario<br><span class="ph">REEMPLAZAR</span></div></div>
+  </div>
+</div></section>
+
+<section style="background:var(--card)"><div class="w">
+  <div class="tag">El servicio</div>
+  <h2>Así trabajamos: <em>servicio UP</em></h2>
+  <p class="sub">Nos encargamos de todo el contenido de tu Instagram. Vos seguís atendiendo tu negocio.</p>
+  <div class="grid">
+    <div class="card ft"><b>01</b><div><b style="color:var(--tx);font-size:16px">30 piezas por mes</b><br><span style="color:var(--mut)">Reels y carruseles pensados para llegar a gente que todavía no te conoce.</span></div></div>
+    <div class="card ft"><b>02</b><div><b style="color:var(--tx);font-size:16px">Historias que venden</b><br><span style="color:var(--mut)">Secuencias para generar confianza y llevar la charla al DM.</span></div></div>
+    <div class="card ft"><b>03</b><div><b style="color:var(--tx);font-size:16px">Guiones con tu voz</b><br><span style="color:var(--mut)">Entrevista de personalidad y guiones que suenan a vos, no a un robot.</span></div></div>
+    <div class="card ft"><b>04</b><div><b style="color:var(--tx);font-size:16px">Grabación presencial</b><br><span style="color:var(--mut)">Vamos a tu negocio y grabamos con calidad profesional.</span></div></div>
+    <div class="card ft"><b>05</b><div><b style="color:var(--tx);font-size:16px">Landing y programación</b><br><span style="color:var(--mut)">Página para convertir visitas en consultas y publicación ordenada.</span></div></div>
+    <div class="card ft"><b>06</b><div><b style="color:var(--tx);font-size:16px">Métricas y llamada semanal</b><br><span style="color:var(--mut)">Medimos qué funciona y ajustamos cada semana.</span></div></div>
+  </div>
+</div></section>
+
+<section class="cta" id="contacto"><div class="w">
+  <div class="tag">Contacto</div>
+  <h2>¿Charlamos por <em>WhatsApp</em>?</h2>
+  <p class="sub" style="margin-left:auto;margin-right:auto">Escribinos y coordinamos una llamada corta para ver si podemos ayudarte.</p>
+  <div class="row">
+    <!-- Reemplazá XXXXXXX por los números reales (formato: 549 + código de área + número, sin 0 ni 15) -->
+    <a class="btn" href="https://wa.me/549376XXXXXXX?text=Hola%20Marcos%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20m%C3%A1s%20info" target="_blank" rel="noopener">WhatsApp con Marcos</a>
+    <a class="btn o" href="https://wa.me/549376XXXXXXX?text=Hola%20Dante%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20m%C3%A1s%20info" target="_blank" rel="noopener">WhatsApp con Dante</a>
+  </div>
+</div></section>
+
+<footer>© Marcos &amp; Dante · Posadas, Misiones, Argentina</footer>
+</body>
+</html>
