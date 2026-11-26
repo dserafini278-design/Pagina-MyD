@@ -168,7 +168,7 @@ header.scene{padding:88px 0 40px}
 header .intro{border-bottom:0;padding-bottom:0}
 #frase{padding:80px 0}
 .serv div{padding:22px 0}
-.tes.stack,.serv.stack{display:block;position:relative;width:100%;max-width:680px;margin:0 auto}
+.tes.stack,.serv.stack,.caps.stack{display:block;position:relative;width:100%;max-width:680px;margin:0 auto}
 .stack > *{position:absolute;left:0;right:0;top:0;height:100%;transform-origin:50% 0}
 .serv.stack > div{display:flex;flex-direction:column;justify-content:center;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:28px 24px}
 .serv.stack{border-top:0;margin-top:34px}
@@ -252,7 +252,7 @@ figure.vbox{margin:0}
 @media (hover:hover){.vflecha:not(:disabled):hover{border-color:#6c6c72}}
 @media (hover:none){.vflecha{display:none}}
 @media (max-width:860px){
-  .vids{--vw:min(70vw,calc((100svh - 260px) * .5625));display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:4px calc((100vw - var(--vw)) / 2) 6px;scroll-padding-inline:calc((100vw - var(--vw)) / 2);scrollbar-width:none;overscroll-behavior-x:contain;gap:12px;max-width:none}
+  .vids{--vw:max(150px,min(70vw,calc((100svh - 340px) * .5625)));display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:4px calc((100vw - var(--vw)) / 2) 6px;scroll-padding-inline:calc((100vw - var(--vw)) / 2);scrollbar-width:none;overscroll-behavior-x:contain;gap:12px;max-width:none}
   .vbox{flex:0 0 var(--vw);scroll-snap-align:center}
   .vids.car .vbox{flex-basis:var(--vw)}
   .vids.car .vbox:first-of-type{margin-left:0}.vids.car .vbox:last-of-type{margin-right:0}
@@ -268,6 +268,8 @@ figure.vbox{margin:0}
   .intro p{font-size:16px;line-height:1.55;margin-bottom:20px}
   .intro small{margin-top:10px}
 }
+@media (max-width:860px){.caps.stack .cap{background:var(--card);border-style:solid;border-color:var(--bd)}}
+@media (max-width:860px){#videos .hd{margin-bottom:22px}#videos .vctl{margin-top:14px}}
 </style>
 </head>
 <body>
@@ -341,7 +343,7 @@ figure.vbox{margin:0}
   </div>
 </div></section>
 
-<section class="ph"><div class="w">
+<section class="ph" id="mensajes"><div class="w">
   <div class="hd"><h2>Mensajes que nos llegan</h2><p class="sub">Capturas de mensajes, comentarios y reseñas de quienes trabajaron con nosotros.</p></div>
   <div class="caps">
     <!-- REEMPLAZAR cada caja por: <div class="cap"><img src="img/resena1.jpg" alt="Mensaje de un cliente" loading="lazy"></div> -->
@@ -794,6 +796,9 @@ addEventListener('load', () => {
       if (!CEL && entra('#hero > .w', 100)) gsap.timeline({scrollTrigger: fijar('#hero', '+=45%')})
         .to('.intro', {y: -70, opacity: 0, ease: 'none'}, 0)
         .to('#mark', {yPercent: -18, scale: .94, opacity: .1, transformOrigin: 'left bottom', ease: 'none'}, 0);
+      else if (CEL && entra('#hero > .w', 60)) gsap.timeline({scrollTrigger: {...fijar('#hero', '+=35%'), start: 'top top'}})
+        .to('.intro', {y: -24, opacity: .3, ease: 'none'}, 0)
+        .to('#mark', {scale: .93, opacity: .35, transformOrigin: 'left bottom', ease: 'none'}, 0);
 
       // 2. Frase fija: las palabras se encienden mientras la pantalla queda quieta
       const encender = s => { const n = Math.round(s.progress * 1.1 * palabras.length); palabras.forEach((w, i) => w.classList.toggle('on', i < n)); };
@@ -816,7 +821,11 @@ addEventListener('load', () => {
 
       // 5. Videos: en el celular pasan de costado; en la compu suben de a uno
       const vids = document.querySelector('.vids'), cajas = gsap.utils.toArray('.vbox');
-      if (CEL || vids.classList.contains('car')) revelar(vids);
+      if (CEL && entra('#videos > .w', 40)) {
+        const pinV = ScrollTrigger.create(fijar('#videos', '+=35%'));
+        gsap.set(cajas, {y: 90, opacity: 0});
+        gsap.to(cajas, {y: 0, opacity: 1, stagger: .3, ease: 'power2.out', scrollTrigger: {trigger: '#videos', start: 'top 85%', end: () => pinV.end - innerHeight * .1, scrub: .4, invalidateOnRefresh: true}});
+      } else if (CEL || vids.classList.contains('car')) revelar(vids);
       else if (entra('#videos > .w')) {
         gsap.set(cajas, {y: 140, opacity: 0});
         gsap.timeline({scrollTrigger: fijar('#videos', '+=55%')})
@@ -824,7 +833,7 @@ addEventListener('load', () => {
       } else revelar(cajas, .12);
 
       // 6. Capturas, pasos y formulario: aparecen al llegar
-      revelar('.caps .cap', .12);
+      if (CEL) apilar('#mensajes', document.querySelector('.caps'), gsap.utils.toArray('.caps .cap')); else revelar('.caps .cap', .12);
       revelar('.steps li', .1);
       gsap.from('.qf', {scale: .94, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: {trigger: '.qf', start: 'top 88%'}});
 
