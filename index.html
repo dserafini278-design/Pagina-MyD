@@ -224,6 +224,50 @@ header .intro{border-bottom:0;padding-bottom:0}
   .hud .bl{transition:opacity .3s}
   .hud.off .bl{opacity:0}
 }
+
+/* ===== v8: carrusel de videos que se desliza con el dedo y se reproduce al tocar ===== */
+.vids{position:relative}
+figure.vbox{margin:0}
+.vbox{position:relative}
+.vbox video{position:absolute;inset:0;background:#000}
+.vplay{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;border:0;padding:0;margin:0;cursor:pointer;background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(0,0,0,.7));transition:opacity .25s}
+.vplay .play{background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-color:rgba(255,255,255,.5);transition:transform .2s}
+@media (hover:hover){.vplay:hover .play{transform:scale(1.08)}}
+.vbox figcaption{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;text-align:left;color:#d6d6d9;font-size:14px;line-height:1.35;pointer-events:none;transition:opacity .25s}
+.vbox figcaption b{display:block;color:#fff;font-size:16px;font-weight:600}
+.vbox.playing .vplay,.vbox.playing figcaption{opacity:0;pointer-events:none}
+.vids.car{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;max-width:none;scrollbar-width:none;overscroll-behavior-x:contain}
+.vids.car .vbox{flex:0 0 max(170px,min(clamp(190px,calc((100vh - 300px) * .5625),300px),calc((100% - (var(--n,4) - 1) * 18px) / var(--n,4))));scroll-snap-align:center;margin-top:0}
+.vids.car .vbox:first-of-type{margin-left:auto}.vids.car .vbox:last-of-type{margin-right:auto}
+.vids::-webkit-scrollbar{display:none}
+.vctl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px}
+.vctl[hidden]{display:none}
+.vdots{display:flex;gap:2px}
+.vdots button{width:26px;height:26px;border:0;padding:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.vdots button:before{content:"";width:7px;height:7px;border-radius:4px;background:#45454a;transition:width .25s,background-color .25s}
+.vdots button.on:before{width:22px;background:var(--tx)}
+.vflecha{width:44px;height:44px;border-radius:50%;border:1px solid var(--bd);background:transparent;color:var(--tx);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s,opacity .2s}
+.vflecha svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vflecha:disabled{opacity:.3;cursor:default}
+@media (hover:hover){.vflecha:not(:disabled):hover{border-color:#6c6c72}}
+@media (hover:none){.vflecha{display:none}}
+@media (max-width:860px){
+  .vids{--vw:min(70vw,calc((100svh - 260px) * .5625));display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:4px calc((100vw - var(--vw)) / 2) 6px;scroll-padding-inline:calc((100vw - var(--vw)) / 2);scrollbar-width:none;overscroll-behavior-x:contain;gap:12px;max-width:none}
+  .vbox{flex:0 0 var(--vw);scroll-snap-align:center}
+  .vids.car .vbox{flex-basis:var(--vw)}
+  .vids.car .vbox:first-of-type{margin-left:0}.vids.car .vbox:last-of-type{margin-right:0}
+}
+
+/* ===== v8b: inicio más compacto en el celular ===== */
+@media (max-width:860px){
+  header.scene{min-height:auto;padding:104px 0 56px}
+  .meta{margin-bottom:10px}
+  .mark{margin-bottom:22px}
+  .intro{gap:14px}
+  .intro h1{font-size:clamp(27px,7.4vw,34px)}
+  .intro p{font-size:16px;line-height:1.55;margin-bottom:20px}
+  .intro small{margin-top:10px}
+}
 </style>
 </head>
 <body>
@@ -283,11 +327,17 @@ header .intro{border-bottom:0;padding-bottom:0}
 
 <section class="ph scene" id="videos"><div class="w">
   <div class="hd"><h2>Nuestros clientes, en cámara</h2><p class="sub">Videos cortos de clientes contando su experiencia.</p></div>
-  <div class="vids">
-    <!-- REEMPLAZAR cada caja por: <div class="vbox"><video src="img/cliente1.mp4" controls playsinline preload="metadata"></video></div> -->
+  <div class="vids" id="vids">
+    <!-- VIDEO REAL (reemplaza una caja vacía):
+    <figure class="vbox"><video src="img/videos/NOMBRE.mp4" poster="img/videos/NOMBRE.jpg" preload="none" playsinline></video><button class="vplay" type="button" aria-label="Reproducir video de NOMBRE"><span class="play"></span></button><figcaption><b>Nombre del cliente</b>Rubro, ciudad</figcaption></figure> -->
     <div class="vbox"><div class="play"></div>Video del cliente 1</div>
     <div class="vbox"><div class="play"></div>Video del cliente 2</div>
     <div class="vbox"><div class="play"></div>Video del cliente 3</div>
+  </div>
+  <div class="vctl" id="vctl" hidden>
+    <button type="button" class="vflecha" id="vprev" aria-label="Video anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="vdots" id="vdots"></div>
+    <button type="button" class="vflecha" id="vnext" aria-label="Video siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
   </div>
 </div></section>
 
@@ -645,6 +695,44 @@ document.addEventListener('click', e => {
   else scrollTo({top: fin, behavior: QUIETO ? 'auto' : 'smooth'});
 });
 
+/* ===== Videos de clientes: carrusel que se desliza con el dedo, puntitos, flechas y reproducción al tocar ===== */
+(function videos() {
+  const vids = $('vids'), ctl = $('vctl'), dots = $('vdots'), prev = $('vprev'), next = $('vnext');
+  const cards = [...vids.querySelectorAll('.vbox')];
+  if (cards.length > 3) { vids.classList.add('car'); vids.style.setProperty('--n', cards.length); }   // con más de 3 videos, también en la compu es carrusel
+  const pelis = cards.map(c => c.querySelector('video')).filter(Boolean);
+  const pausarOtros = v => pelis.forEach(o => { if (o !== v && !o.paused) o.pause(); });
+  cards.forEach(c => {
+    const v = c.querySelector('video'), b = c.querySelector('.vplay'); if (!v || !b) return;
+    b.addEventListener('click', () => { if (v.paused) { pausarOtros(v); v.controls = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); } else v.pause(); });
+    v.addEventListener('play', () => { c.classList.add('playing'); pausarOtros(v); });
+    v.addEventListener('pause', () => c.classList.remove('playing'));
+    v.addEventListener('ended', () => { c.classList.remove('playing'); v.controls = false; });
+  });
+  // Si el video sale de la pantalla (deslizando o bajando), se pausa solo
+  if ('IntersectionObserver' in window && pelis.length) {
+    const io = new IntersectionObserver(es => es.forEach(e => { const v = e.target.querySelector('video'); if (v && !v.paused && e.intersectionRatio < .5) v.pause(); }), {threshold: [0, .5]});
+    cards.forEach(c => c.querySelector('video') && io.observe(c));
+  }
+  // Puntitos y flechas (solo si hay algo para deslizar)
+  cards.forEach((c, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Ver video ' + (i + 1));
+    b.onclick = () => ir(i); dots.append(b);
+  });
+  const centro = c => c.offsetLeft - (vids.clientWidth - c.offsetWidth) / 2;
+  const actual = () => { const m = vids.scrollLeft, max = vids.scrollWidth - vids.clientWidth; if (m <= 4) return 0; if (m >= max - 4) return cards.length - 1; let k = 0, d = 1e9; cards.forEach((c, i) => { const x = Math.abs(centro(c) - m); if (x < d) { d = x; k = i; } }); return k; };
+  function ir(i) { i = Math.max(0, Math.min(cards.length - 1, i)); vids.scrollTo({left: centro(cards[i]), behavior: QUIETO ? 'auto' : 'smooth'}); }
+  function pintar() {
+    const se = vids.scrollWidth > vids.clientWidth + 24; ctl.hidden = !se; if (!se) return;
+    const k = actual(); [...dots.children].forEach((d, i) => d.classList.toggle('on', i === k));
+    prev.disabled = vids.scrollLeft < 4; next.disabled = vids.scrollLeft > vids.scrollWidth - vids.clientWidth - 4;
+  }
+  const correr = d => { const paso = cards[0].offsetWidth + (parseFloat(getComputedStyle(vids).columnGap) || 14); vids.scrollBy({left: d * paso, behavior: QUIETO ? 'auto' : 'smooth'}); };
+  prev.onclick = () => correr(-1); next.onclick = () => correr(1);
+  let t = false; vids.addEventListener('scroll', () => { if (t) return; t = true; requestAnimationFrame(() => { t = false; pintar(); }); }, {passive: true});
+  addEventListener('resize', pintar); addEventListener('load', pintar); pintar();
+})();
+
 /* ===== Animaciones (GSAP + Lenis). Si no cargan, la página se ve igual, sin movimiento. ===== */
 addEventListener('load', () => {
   const palabras = [...say.querySelectorAll('.wd')];
@@ -728,14 +816,8 @@ addEventListener('load', () => {
 
       // 5. Videos: en el celular pasan de costado; en la compu suben de a uno
       const vids = document.querySelector('.vids'), cajas = gsap.utils.toArray('.vbox');
-      if (CEL) {
-        vids.classList.add('hs');
-        limpiar.push(() => vids.classList.remove('hs'));
-        const ult = cajas[cajas.length - 1];
-        const dist = () => Math.max(0, ult.offsetLeft + ult.offsetWidth - vids.clientWidth + 18);
-        if (entra('#videos > .w')) gsap.to(vids, {x: () => -dist(), ease: 'none', scrollTrigger: fijar('#videos', () => '+=' + dist())});
-        else { vids.classList.remove('hs'); revelar(cajas, .12); }
-      } else if (entra('#videos > .w')) {
+      if (CEL || vids.classList.contains('car')) revelar(vids);
+      else if (entra('#videos > .w')) {
         gsap.set(cajas, {y: 140, opacity: 0});
         gsap.timeline({scrollTrigger: fijar('#videos', '+=55%')})
           .to(cajas, {y: i => i === 1 ? 50 : 0, opacity: 1, stagger: .35, duration: 1, ease: 'power2.out'});
