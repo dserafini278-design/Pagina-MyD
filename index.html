@@ -270,6 +270,17 @@ figure.vbox{margin:0}
 }
 @media (max-width:860px){.caps.stack .cap{background:var(--card);border-style:solid;border-color:var(--bd)}}
 @media (max-width:860px){#videos .hd{margin-bottom:22px}#videos .vctl{margin-top:14px}}
+
+/* ===== v11: detalles de celular (revisión con la guía mobile-native) ===== */
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.top{padding-top:calc(16px + env(safe-area-inset-top,0px))}
+.hud .bl,.hud .br{bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+@media (max-width:860px){.hud .bl{bottom:calc(10px + env(safe-area-inset-bottom,0px))}}
+button,.btn,.opt,.back,.vflecha,.top nav a{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.btn:active{filter:brightness(.86)}
+.opt:active{background:var(--sel);border-color:var(--ac)}
+.back:active,.vflecha:active{border-color:#6c6c72;color:var(--tx)}
+.top nav .go:active{background:#d9d9d6}
 </style>
 </head>
 <body>
@@ -416,7 +427,7 @@ const Q = [
   {id:'rubro_otro', type:'text', t:'¿Qué rubro es?', ph:'Ej: taller mecánico', show:a=>a.rubro===OTRO_RUBRO},
   {id:'ubicacion', type:'choice', t:'¿Dónde está tu negocio?', d:'Grabamos de forma presencial.', o:[POSADAS,'Otra ciudad de Misiones','Otra provincia']},
   {id:'ciudad', type:'text', t:'¿En qué ciudad?', ph:'Ciudad', ac:'address-level2', show:a=>a.ubicacion && a.ubicacion!==POSADAS},
-  {id:'instagram', type:'text', t:'¿Cuál es el Instagram del negocio?', d:'Si todavía no tiene, escribí "no tengo".', ph:'@tunegocio'},
+  {id:'instagram', type:'text', t:'¿Cuál es el Instagram del negocio?', d:'Si todavía no tiene, escribí "no tengo".', ph:'@tunegocio', crudo:true},
   {id:'clientes_hoy', type:'multi', t:'¿Cómo te llegan los clientes hoy?', d:'Podés elegir más de una opción.', o:['Boca a boca o recomendaciones','Instagram','Anuncios pagos','Google','Gente que pasa por el local','Todavía no tengo clientes'], ex:['Todavía no tengo clientes']},
   {id:'redes', type:'choice', t:'¿Quién se ocupa hoy de las redes?', o:['Yo','Alguien de mi equipo','Una agencia o community manager','Nadie, están bastante quietas']},
   {id:'objetivo', type:'long', t:'¿Qué te gustaría lograr en los próximos 6 meses?', d:'Contanos con tus palabras.' + (TOUCH ? '' : ' Shift + Enter para un salto de línea.'), ph:'Escribí acá…'},
@@ -456,6 +467,8 @@ Q.forEach(q => {
     f.className = 'fi'; f.placeholder = q.ph || '';
     if (q.type === 'long') f.rows = 3; else f.type = q.type;
     if (q.ac) f.autocomplete = q.ac;
+    if (q.crudo) { f.autocapitalize = 'none'; f.setAttribute('autocorrect', 'off'); f.spellcheck = false; }
+    if (q.type !== 'long') f.enterKeyHint = 'next';
     f.oninput = () => { A[q.id] = f.value.trim(); err.textContent = ''; };
     if (q.type === 'long' && !TOUCH) f.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); go(); } };
     el.append(f);
@@ -478,6 +491,7 @@ function show(i) {
   back.style.display = hist.length ? '' : 'none';
   const last = nextIndex(i) < 0;
   next.textContent = last ? 'Enviar postulación' : 'Siguiente';
+  const campo = q.el.querySelector('input.fi'); if (campo) campo.enterKeyHint = last ? 'send' : 'next';
   $('cons').hidden = !last;
   hint.style.display = /choice/.test(q.type) ? 'none' : '';
   bar.style.width = (i / Q.length * 100) + '%';
@@ -572,20 +586,25 @@ document.addEventListener('keydown', e => {
 show(0);
 
 /* ===== Diseño: el nombre gigante ocupa todo el ancho ===== */
-function ajustar() {
+// Se mide con offsetWidth (no lo afectan las animaciones que achican el nombre) y solo cuando cambia el ancho:
+// en el celular la barra del navegador cambia el alto al bajar y eso no debe recalcular nada.
+let anchoAjustado = 0;
+function ajustar(forzar) {
+  if (!forzar && innerWidth === anchoAjustado) return;
+  anchoAjustado = innerWidth;
   document.querySelectorAll('.fit').forEach(m => {
     const cs = getComputedStyle(m.parentNode);
     const ancho = m.parentNode.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
     m.style.fontSize = '100px'; m.style.display = 'inline-block';
-    const texto = m.getBoundingClientRect().width;
+    const texto = m.offsetWidth;
     m.style.display = '';
     m.style.fontSize = Math.floor(100 * ancho / texto * 10) / 10 + 'px';
   });
 }
 document.querySelectorAll('.fit').forEach(m => { m.innerHTML = [...m.textContent].map(c => '<span>' + c + '</span>').join(''); });
-ajustar();
-(document.fonts ? document.fonts.ready : Promise.resolve()).then(ajustar);
-addEventListener('resize', ajustar);
+ajustar(true);
+(document.fonts ? document.fonts.ready : Promise.resolve()).then(() => ajustar(true));
+addEventListener('resize', () => ajustar());
 
 /* Frase grande: cada palabra en su caja para iluminarla al bajar */
 const say = $('say');
