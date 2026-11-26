@@ -823,8 +823,10 @@ addEventListener('load', () => {
       const vids = document.querySelector('.vids'), cajas = gsap.utils.toArray('.vbox');
       if (CEL && entra('#videos > .w', 40)) {
         const pinV = ScrollTrigger.create(fijar('#videos', '+=35%'));
-        gsap.set(cajas, {y: 90, opacity: 0});
-        gsap.to(cajas, {y: 0, opacity: 1, stagger: .3, ease: 'power2.out', scrollTrigger: {trigger: '#videos', start: 'top 85%', end: () => pinV.end - innerHeight * .1, scrub: .4, invalidateOnRefresh: true}});
+        // Sube la fila entera (el carrusel recorta lo que se sale de su caja) y cada video aparece creciendo apenas
+        const st = {trigger: '#videos', start: 'top 85%', end: () => pinV.end - innerHeight * .1, scrub: .4, invalidateOnRefresh: true};
+        gsap.fromTo(vids, {y: 80}, {y: 0, ease: 'power2.out', scrollTrigger: st});
+        gsap.fromTo(cajas, {opacity: 0, scale: .9, transformOrigin: '50% 100%'}, {opacity: 1, scale: 1, stagger: .3, ease: 'power2.out', scrollTrigger: {...st}});
       } else if (CEL || vids.classList.contains('car')) revelar(vids);
       else if (entra('#videos > .w')) {
         gsap.set(cajas, {y: 140, opacity: 0});
