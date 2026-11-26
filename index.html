@@ -52,7 +52,7 @@ h2{font-size:clamp(34px,5.6vw,76px);line-height:.98;letter-spacing:-.035em;font-
 
 /* Encabezado: nombre gigante */
 header{padding:120px 0 0;overflow:hidden}
-.mark{display:block;font-weight:900;font-stretch:125%;line-height:.8;letter-spacing:-.045em;white-space:nowrap;margin:0 0 clamp(36px,5vw,64px);font-size:17.5vw;overflow:hidden;padding-bottom:.04em}
+.mark{display:block;font-weight:900;font-stretch:125%;line-height:.8;letter-spacing:-.045em;white-space:nowrap;margin:0 0 clamp(36px,5vw,64px);font-size:17.5vw;padding-bottom:.04em}
 .mark span{display:inline-block;will-change:transform}
 .intro{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,6vw,96px);align-items:end;padding-bottom:clamp(64px,9vw,120px);border-bottom:1px solid var(--bd)}
 .intro h1{font-size:clamp(30px,3.6vw,50px);line-height:1.05;letter-spacing:-.03em;font-weight:600;font-stretch:92%;margin:0;text-wrap:balance}
@@ -215,6 +215,15 @@ header .intro{border-bottom:0;padding-bottom:0}
 @media (max-width:860px){.vbox{flex-basis:clamp(150px,calc((100svh - 300px) * .5625),64%)}}
 .hud{contain:layout style}
 @media (max-height:500px){.qf{min-height:0;padding-top:28px}}
+
+/* ===== v7: ajustes de celular (sin huecos, hora que no tapa) ===== */
+@media (max-width:860px){
+  section.scene{min-height:0}
+  section{padding:72px 0}
+  #frase{padding:56px 0}
+  .hud .bl{transition:opacity .3s}
+  .hud.off .bl{opacity:0}
+}
 </style>
 </head>
 <body>
@@ -583,6 +592,7 @@ reloj(); setInterval(reloj, 1000);
 addEventListener('scroll', () => {
   const max = document.documentElement.scrollHeight - innerHeight;
   $('pct').textContent = String(Math.round(max > 0 ? scrollY / max * 100 : 0)).padStart(3, '0');
+  document.querySelector('.hud').classList.toggle('off', scrollY > innerHeight * .4 && scrollY < max - innerHeight * .2);
 }, {passive: true});
 
 // Textos chicos que se "descifran" al cargar
@@ -652,7 +662,7 @@ addEventListener('load', () => {
 
   // Entrada: las letras del nombre suben una por una, después el resto (una sola vez)
   gsap.timeline({defaults: {ease: 'expo.out'}})
-    .from('#mark span', {yPercent: 110, duration: 1.3, stagger: .055, onComplete: () => { $('mark').style.overflow = 'visible'; }})
+    .from('#mark span', {yPercent: 45, opacity: 0, duration: TOUCH ? .8 : 1.2, stagger: TOUCH ? .035 : .05})
     .from('.intro h1, .intro > div > *', {y: 30, opacity: 0, duration: 1.1, stagger: .08}, '-=.9')
     .from('.top', {opacity: 0, duration: .8}, '-=1');
 
@@ -669,7 +679,7 @@ addEventListener('load', () => {
   // ----- Escenas al bajar. Se arman según el tamaño de pantalla y se rearman si cambia. -----
   const entra = (sel, m = 24) => { const el = document.querySelector(sel); return el && el.offsetHeight <= innerHeight - m; };
   const revelar = (els, st = .1) => { els = gsap.utils.toArray(els); if (els.length) gsap.from(els, {y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: st, scrollTrigger: {trigger: els[0], start: 'top 88%'}}); };
-  const fijar = (sec, largo) => ({trigger: sec, start: 'top top', end: largo, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true});
+  const fijar = (sec, largo) => ({trigger: sec, start: innerWidth <= 860 ? 'center center' : 'top top', end: largo, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true});
   let limpiar = [];
 
   // Mazo de tarjetas: la pantalla queda quieta y cada tarjeta sube y tapa a la anterior
@@ -693,7 +703,7 @@ addEventListener('load', () => {
     return gsap.context(() => {
       // 1. Encabezado fijo: al bajar, el nombre se apaga y el texto se va
       // (solo si entra en la pantalla; por ejemplo, con el celular acostado no se fija)
-      if (entra('#hero > .w', 100)) gsap.timeline({scrollTrigger: fijar('#hero', '+=45%')})
+      if (!CEL && entra('#hero > .w', 100)) gsap.timeline({scrollTrigger: fijar('#hero', '+=45%')})
         .to('.intro', {y: -70, opacity: 0, ease: 'none'}, 0)
         .to('#mark', {yPercent: -18, scale: .94, opacity: .1, transformOrigin: 'left bottom', ease: 'none'}, 0);
 
@@ -737,7 +747,7 @@ addEventListener('load', () => {
       gsap.from('.qf', {scale: .94, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: {trigger: '.qf', start: 'top 88%'}});
 
       // 7. Nombre del pie: las letras suben al llegar al final
-      gsap.from('footer .mark span', {yPercent: 100, duration: 1.2, ease: 'expo.out', stagger: .05, scrollTrigger: {trigger: 'footer', start: 'top 85%'}});
+      gsap.from('footer .mark span', {yPercent: 45, opacity: 0, duration: 1, ease: 'expo.out', stagger: .05, scrollTrigger: {trigger: 'footer', start: 'top 85%'}});
     });
   }
 
