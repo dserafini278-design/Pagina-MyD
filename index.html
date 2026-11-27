@@ -285,6 +285,17 @@ button,.btn,.opt,.back,.vflecha,.top nav a{-webkit-user-select:none;user-select:
 .top nav .go:active{background:#d9d9d6}
 /* v12: subtítulo debajo del título; en compu la sección de videos entra entera en pantalla */
 @media (min-width:861px){#videos.scene{padding:clamp(84px,11vh,160px) 0 24px}}
+/* v16: capturas reales en Mensajes */
+.caps.dos{grid-template-columns:1fr;max-width:860px}
+figure.cap.foto{margin:0;aspect-ratio:auto;display:block;padding:0;border:1px solid var(--bd);background:#0e0e0e;overflow:hidden;text-align:left}
+figure.cap.foto img{display:block;width:100%;height:auto;border-radius:0}
+figure.cap.foto figcaption{padding:12px 18px 14px;font-size:14px;color:var(--mut);border-top:1px solid var(--bd)}
+@media (max-width:860px){figure.cap.foto{min-height:0}.caps.stack figure.cap.foto{background:#0e0e0e}}
+.chat{display:none;flex-direction:column;align-items:flex-start;gap:6px;padding:16px 14px 14px}
+.chat p{margin:0;max-width:92%;background:#1f1f1f;color:#e6e6e3;border-radius:18px;padding:9px 13px;font-size:15px;line-height:1.4}
+.chat time{display:block;text-align:right;font-size:11px;color:var(--mut);margin-top:2px}
+.chat .emo{filter:grayscale(1)}
+@media (max-width:860px){figure.cap.foto img{display:none}.chat{display:flex}}
 </style>
 </head>
 <body>
@@ -360,12 +371,11 @@ button,.btn,.opt,.back,.vflecha,.top nav a{-webkit-user-select:none;user-select:
 </div></section>
 
 <section class="ph" id="mensajes"><div class="w">
-  <div class="hd"><h2>Mensajes que nos llegan</h2><p class="sub">Capturas de mensajes, comentarios y reseñas de quienes trabajaron con nosotros.</p></div>
-  <div class="caps">
+  <div class="hd"><h2>Mensajes que nos llegan</h2><p class="sub">Capturas de mensajes, comentarios y reseñas de quienes trabajaron con nosotros. Ocultamos nombres y fotos por privacidad.</p></div>
+  <div class="caps dos">
     <!-- REEMPLAZAR cada caja por: <div class="cap"><img src="img/resena1.jpg" alt="Mensaje de un cliente" loading="lazy"></div> -->
-    <div class="cap">Captura de WhatsApp o mensaje directo</div>
-    <div class="cap">Captura de reseña</div>
-    <div class="cap">Captura de comentario</div>
+    <figure class="cap foto"><img src="img/mensaje-1.jpg" width="1246" height="648" alt="Mensaje de un cliente por Instagram: Son unos genios. Tenía un montón de ideas pero a la hora de grabar me costaba y terminaba sin hacer nada. Con ellos subimos los primeros videos y tuvimos un montón de comentarios. Me sacaron un quilombo de encima, ahora tenemos todo mucho más ordenado." loading="lazy"><div class="chat" aria-hidden="true"><p>Son unos genios!!</p><p>Tenía un montón de ideas dando vueltas, pero a la hora de grabar me costaba un montón y terminaba sin hacer nadaa</p><p>Con ellos subimos los primeros videos y tuvimos un monton de comentarios, algo que antes me costaba mucho hacer solo jajajaj</p><p>La verdad, me sacaron un quilombo de encima jajajj</p><p>Entre el taller y todo lo demas el hacer contenido era algo que siempre terminaba pateando</p><p>Y ahora tenemos todo mucho más ordenado y casi no hago nada!! Se nota el laburo atrás y eso me deja bastante tranquilo</p></div><figcaption>Cliente anónimo, por Instagram</figcaption></figure>
+    <figure class="cap foto"><img src="img/mensaje-2.jpg" width="1320" height="360" alt="Mensaje de una clienta por WhatsApp: Al principio me daba cosa delegar el contenido, pero desde la primera reunión entendieron muy bien lo que buscábamos. En pocas semanas empezamos a recibir consultas por Instagram. Muy buen trabajo, súper atentos y organizados." loading="lazy"><div class="chat" aria-hidden="true"><p>Al principio me daba bastante cosa delegar el contenido porque no quería que terminara siendo algo que no nos representara<time>11:08</time></p><p>Pero desde la primera reunión entendieron muy bien lo que buscábamos y hasta me hicieron replantear algunas cosas sobre nuestro público! <span class="emo">😅</span><time>11:09</time></p><p>y en pocas semanas empezamos a recibir consultas por el Instagram, que era justamente lo que buscábamos<br>Muy buen trabajo de ellos, súper atentos y organizados<time>11:09</time></p></div><figcaption>Cliente anónimo, por WhatsApp</figcaption></figure>
   </div>
 </div></section>
 
@@ -869,7 +879,7 @@ addEventListener('load', () => {
       } else revelar(cajas, .12);
 
       // 6. Capturas, pasos y formulario: aparecen al llegar
-      if (CEL) apilar('#mensajes', document.querySelector('.caps'), gsap.utils.toArray('.caps .cap')); else revelar('.caps .cap', .12);
+      revelar('.caps .cap', .12);
       revelar('.steps li', .1);
       gsap.from('.qf', {scale: .94, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: {trigger: '.qf', start: 'top 88%'}});
 
