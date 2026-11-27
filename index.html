@@ -763,6 +763,9 @@ addEventListener('load', () => {
   if (QUIETO || !window.gsap || !window.ScrollTrigger) { palabras.forEach(w => w.classList.add('on')); $('mark').style.overflow = 'visible'; return; }
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ignoreMobileResize: true});
+  // Celular: el scroll y las animaciones van en el mismo paso, así con un scroll rápido las secciones fijas no se atrasan ni se pisan
+  if (TOUCH) ScrollTrigger.normalizeScroll({allowNestedScroll: true, type: 'touch'});
+  const SCRUB = TOUCH ? true : .4;
 
   // Scroll suave con Lenis (solo en compu; en el celular queda el scroll natural del teléfono, que es el más fluido)
   if (window.Lenis && !TOUCH) {
@@ -791,7 +794,7 @@ addEventListener('load', () => {
   // ----- Escenas al bajar. Se arman según el tamaño de pantalla y se rearman si cambia. -----
   const entra = (sel, m = 24) => { const el = document.querySelector(sel); return el && el.offsetHeight <= innerHeight - m; };
   const revelar = (els, st = .1) => { els = gsap.utils.toArray(els); if (els.length) gsap.from(els, {y: 50, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: st, scrollTrigger: {trigger: els[0], start: 'top 88%'}}); };
-  const fijar = (sec, largo) => ({trigger: sec, start: innerWidth <= 860 ? 'center center' : 'top top', end: largo, pin: true, scrub: .4, anticipatePin: 1, invalidateOnRefresh: true});
+  const fijar = (sec, largo) => ({trigger: sec, start: innerWidth <= 860 ? 'center center' : 'top top', end: largo, pin: true, scrub: SCRUB, anticipatePin: 1, invalidateOnRefresh: true});
   let limpiar = [];
 
   // Mazo de tarjetas: la pantalla queda quieta y cada tarjeta sube y tapa a la anterior
@@ -846,7 +849,7 @@ addEventListener('load', () => {
       if (CEL && entra('#videos > .w', 40)) {
         const pinV = ScrollTrigger.create(fijar('#videos', '+=35%'));
         // Sube la fila entera (el carrusel recorta lo que se sale de su caja) y cada video aparece creciendo apenas
-        const st = {trigger: '#videos', start: 'top 85%', end: () => pinV.end - innerHeight * .1, scrub: .4, invalidateOnRefresh: true};
+        const st = {trigger: '#videos', start: 'top 85%', end: () => pinV.end - innerHeight * .1, scrub: SCRUB, invalidateOnRefresh: true};
         gsap.fromTo(vids, {y: 80}, {y: 0, ease: 'power2.out', scrollTrigger: st});
         gsap.fromTo(cajas, {opacity: 0, scale: .9, transformOrigin: '50% 100%'}, {opacity: 1, scale: 1, stagger: .3, ease: 'power2.out', scrollTrigger: {...st}});
       } else if (CEL) revelar(vids);
