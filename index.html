@@ -237,7 +237,7 @@ figure.vbox{margin:0}
 .vbox figcaption b{display:block;color:#fff;font-size:16px;font-weight:600}
 .vbox.playing .vplay,.vbox.playing figcaption{opacity:0;pointer-events:none}
 .vids.car{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;max-width:none;scrollbar-width:none;overscroll-behavior-x:contain}
-.vids.car .vbox{flex:0 0 max(170px,min(clamp(190px,calc((100vh - 360px) * .5625),300px),calc((100% - (var(--n,4) - 1) * 18px) / var(--n,4))));scroll-snap-align:center;margin-top:0}
+.vids.car .vbox{flex:0 0 max(170px,min(clamp(190px,calc((100vh - 320px) * .5625),300px),calc((100% - (var(--n,4) - 1) * 18px) / var(--n,4))));scroll-snap-align:center;margin-top:0}
 .vids.car .vbox:first-of-type{margin-left:auto}.vids.car .vbox:last-of-type{margin-right:auto}
 .vids::-webkit-scrollbar{display:none}
 .vctl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px}
@@ -345,9 +345,10 @@ button,.btn,.opt,.back,.vflecha,.top nav a{-webkit-user-select:none;user-select:
   <div class="vids" id="vids">
     <!-- VIDEO REAL (reemplaza una caja vacía):
     <figure class="vbox"><video src="img/videos/NOMBRE.mp4" poster="img/videos/NOMBRE.jpg" preload="none" playsinline></video><button class="vplay" type="button" aria-label="Reproducir video de NOMBRE"><span class="play"></span></button><figcaption><b>Nombre del cliente</b>Rubro, ciudad</figcaption></figure> -->
-    <div class="vbox"><div class="play"></div>Video del cliente 1</div>
-    <div class="vbox"><div class="play"></div>Video del cliente 2</div>
-    <div class="vbox"><div class="play"></div>Video del cliente 3</div>
+    <figure class="vbox"><video src="img/videos/cliente-abogada.mp4" poster="img/videos/cliente-abogada.jpg" preload="none" playsinline></video><button class="vplay" type="button" aria-label="Reproducir video: Abogada de familia"><span class="play"></span></button><figcaption><b>Abogada de familia</b>Contenido para Instagram</figcaption></figure>
+    <figure class="vbox"><video src="img/videos/cliente-zapatillas.mp4" poster="img/videos/cliente-zapatillas.jpg" preload="none" playsinline></video><button class="vplay" type="button" aria-label="Reproducir video: Tienda de zapatillas"><span class="play"></span></button><figcaption><b>Tienda de zapatillas</b>Contenido para Instagram</figcaption></figure>
+    <figure class="vbox"><video src="img/videos/cliente-celulares.mp4" poster="img/videos/cliente-celulares.jpg" preload="none" playsinline></video><button class="vplay" type="button" aria-label="Reproducir video: Tienda de celulares"><span class="play"></span></button><figcaption><b>Tienda de celulares</b>Edición de video</figcaption></figure>
+    <figure class="vbox"><video src="img/videos/cliente-entrenador.mp4" poster="img/videos/cliente-entrenador.jpg" preload="none" playsinline></video><button class="vplay" type="button" aria-label="Reproducir video: Entrenador personal"><span class="play"></span></button><figcaption><b>Entrenador personal</b>Planificación de contenido y edición</figcaption></figure>
   </div>
   <div class="vctl" id="vctl" hidden>
     <button type="button" class="vflecha" id="vprev" aria-label="Video anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -848,7 +849,14 @@ addEventListener('load', () => {
         const st = {trigger: '#videos', start: 'top 85%', end: () => pinV.end - innerHeight * .1, scrub: .4, invalidateOnRefresh: true};
         gsap.fromTo(vids, {y: 80}, {y: 0, ease: 'power2.out', scrollTrigger: st});
         gsap.fromTo(cajas, {opacity: 0, scale: .9, transformOrigin: '50% 100%'}, {opacity: 1, scale: 1, stagger: .3, ease: 'power2.out', scrollTrigger: {...st}});
-      } else if (CEL || vids.classList.contains('car')) revelar(vids);
+      } else if (CEL) revelar(vids);
+      else if (vids.classList.contains('car') && entra('#videos > .w')) {
+        // Más de 3 videos en compu: sube la fila entera y cada video aparece creciendo (el carrusel recorta lo que se sale)
+        gsap.set(vids, {y: 80}); gsap.set(cajas, {opacity: 0, scale: .9, transformOrigin: '50% 100%'});
+        gsap.timeline({scrollTrigger: fijar('#videos', '+=55%')})
+          .to(vids, {y: 0, duration: 1.6, ease: 'power2.out'}, 0)
+          .to(cajas, {opacity: 1, scale: 1, stagger: .35, duration: 1, ease: 'power2.out'}, 0);
+      } else if (vids.classList.contains('car')) revelar(vids);
       else if (entra('#videos > .w')) {
         gsap.set(cajas, {y: 140, opacity: 0});
         gsap.timeline({scrollTrigger: fijar('#videos', '+=55%')})
