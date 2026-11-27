@@ -84,7 +84,7 @@ header{padding:120px 0 0;overflow:hidden}
 
 /* Pruebas */
 .ph{border-top:1px solid var(--bd)}
-.ph .hd{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+.ph .hd{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-bottom:clamp(36px,5vw,64px)}
 .tes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tes figure{margin:0;padding:30px 28px;background:var(--card);border:1px solid var(--bd);border-radius:20px;display:flex;flex-direction:column;gap:28px;min-height:300px}
 .tes blockquote{margin:0;font-family:var(--serif);font-size:clamp(22px,2vw,28px);line-height:1.2}
@@ -211,7 +211,7 @@ header .intro{border-bottom:0;padding-bottom:0}
   .ph .hd{margin-bottom:28px}
   header.scene{padding-top:76px}
 }
-.vids{max-width:min(760px,calc(1.6875 * (100vh - 300px) + 36px))}
+.vids{max-width:min(760px,calc(1.6875 * (100vh - 360px) + 36px))}
 @media (max-width:860px){.vbox{flex-basis:clamp(150px,calc((100svh - 300px) * .5625),64%)}}
 .hud{contain:layout style}
 @media (max-height:500px){.qf{min-height:0;padding-top:28px}}
@@ -237,7 +237,7 @@ figure.vbox{margin:0}
 .vbox figcaption b{display:block;color:#fff;font-size:16px;font-weight:600}
 .vbox.playing .vplay,.vbox.playing figcaption{opacity:0;pointer-events:none}
 .vids.car{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;max-width:none;scrollbar-width:none;overscroll-behavior-x:contain}
-.vids.car .vbox{flex:0 0 max(170px,min(clamp(190px,calc((100vh - 300px) * .5625),300px),calc((100% - (var(--n,4) - 1) * 18px) / var(--n,4))));scroll-snap-align:center;margin-top:0}
+.vids.car .vbox{flex:0 0 max(170px,min(clamp(190px,calc((100vh - 360px) * .5625),300px),calc((100% - (var(--n,4) - 1) * 18px) / var(--n,4))));scroll-snap-align:center;margin-top:0}
 .vids.car .vbox:first-of-type{margin-left:auto}.vids.car .vbox:last-of-type{margin-right:auto}
 .vids::-webkit-scrollbar{display:none}
 .vctl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:22px}
@@ -281,6 +281,8 @@ button,.btn,.opt,.back,.vflecha,.top nav a{-webkit-user-select:none;user-select:
 .opt:active{background:var(--sel);border-color:var(--ac)}
 .back:active,.vflecha:active{border-color:#6c6c72;color:var(--tx)}
 .top nav .go:active{background:#d9d9d6}
+/* v12: subtítulo debajo del título; en compu la sección de videos entra entera en pantalla */
+@media (min-width:861px){#videos.scene{padding:clamp(84px,11vh,160px) 0 24px}}
 </style>
 </head>
 <body>
@@ -850,7 +852,7 @@ addEventListener('load', () => {
       else if (entra('#videos > .w')) {
         gsap.set(cajas, {y: 140, opacity: 0});
         gsap.timeline({scrollTrigger: fijar('#videos', '+=55%')})
-          .to(cajas, {y: i => i === 1 ? 50 : 0, opacity: 1, stagger: .35, duration: 1, ease: 'power2.out'});
+          .to(cajas, {y: 0, opacity: 1, stagger: .35, duration: 1, ease: 'power2.out'});
       } else revelar(cajas, .12);
 
       // 6. Capturas, pasos y formulario: aparecen al llegar
