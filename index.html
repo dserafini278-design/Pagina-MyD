@@ -871,7 +871,7 @@ addEventListener('load', () => {
       } else revelar(cajas, .12);
 
       // 6. Capturas, pasos y formulario: aparecen al llegar
-      if (CEL) apilar('#mensajes', document.querySelector('.caps'), gsap.utils.toArray('.caps .cap')); else revelar('.caps .cap', .12);
+      apilar('#mensajes', document.querySelector('.caps'), gsap.utils.toArray('.caps .cap'));   // referencias: mazo en compu y celular
       revelar('.steps li', .1);
       gsap.from('.qf', {scale: .94, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: {trigger: '.qf', start: 'top 88%'}});
 
