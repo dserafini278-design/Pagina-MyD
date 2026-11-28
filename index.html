@@ -99,15 +99,10 @@ header{padding:120px 0 0;overflow:hidden}
 .play{width:62px;height:62px;border-radius:50%;border:1px solid #3a3a3e;display:flex;align-items:center;justify-content:center}
 .play:after{content:"";border-left:16px solid var(--tx);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
 .caps{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.cap{display:flex;flex-direction:column;gap:26px;min-height:280px;padding:30px 28px;border-radius:20px;background:var(--card);border:1px solid var(--bd);color:var(--tx);text-decoration:none;transition:border-color .3s}
-.cap .mono{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.cap svg{width:20px;height:20px;flex:none;color:var(--mut);transition:color .3s}
-.cap strong{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.6vw,50px);line-height:1.05;overflow-wrap:anywhere}
-.cap em{margin-top:auto;font-style:normal;font-size:15px;color:var(--ac);display:inline-flex;gap:8px}
-.cap em i{font-style:normal;display:inline-block;transition:translate .3s}
-.cap:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
-@media (hover:hover){.cap:hover{border-color:var(--ac)}.cap:hover svg{color:var(--tx)}.cap:hover em i{translate:3px -3px}}
-@media (max-width:860px){.tes,.caps{grid-template-columns:1fr}.tes figure{min-height:0}.vids{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:0 18px 6px;max-width:none}.vbox{flex:0 0 64%;scroll-snap-align:start}.vbox:nth-child(2){margin-top:0}.cap{min-height:220px;padding:26px 24px}}
+.cap{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;min-height:240px;padding:30px 24px;border-radius:20px;background:var(--card);border:1px solid var(--bd);text-align:center}
+.cap .btn{max-width:100%;overflow-wrap:anywhere}
+.cap .btn svg{width:20px;height:20px;flex:none}
+@media (max-width:860px){.tes,.caps{grid-template-columns:1fr}.tes figure{min-height:0}.vids{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -18px;padding:0 18px 6px;max-width:none}.vbox{flex:0 0 64%;scroll-snap-align:start}.vbox:nth-child(2){margin-top:0}.cap{min-height:200px;padding:26px 18px}}
 
 /* Postulación */
 #postular{border-top:1px solid var(--bd)}
@@ -367,8 +362,8 @@ button,.btn,.opt,.back,.vflecha,.top nav a{-webkit-user-select:none;user-select:
 <section class="ph" id="mensajes"><div class="w">
   <div class="hd"><h2>¿Necesitás referencias laborales?</h2><p class="sub">Instagram de clientes con los que trabajamos, para que puedas comunicarte con ellos y consultar sobre el servicio.</p></div>
   <div class="caps">
-    <a class="cap" href="https://www.instagram.com/abogadavictoriamolina/" target="_blank" rel="noopener" aria-label="Instagram de abogadavictoriamolina (abogada), se abre en otra pestaña"><span class="mono">Abogada<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></span><strong>@abogadavictoriamolina</strong><em>Ver perfil <i>↗</i></em></a>
-    <a class="cap" href="https://www.instagram.com/trays_tm/" target="_blank" rel="noopener" aria-label="Instagram de trays_tm (tienda de zapatillas), se abre en otra pestaña"><span class="mono">Tienda de zapatillas<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg></span><strong>@trays_tm</strong><em>Ver perfil <i>↗</i></em></a>
+    <div class="cap"><span class="mono">Abogada</span><a class="btn" href="https://www.instagram.com/abogadavictoriamolina/" target="_blank" rel="noopener" aria-label="Instagram de abogadavictoriamolina (abogada), se abre en otra pestaña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>@abogadavictoriamolina</a></div>
+    <div class="cap"><span class="mono">Tienda de zapatillas</span><a class="btn" href="https://www.instagram.com/trays_tm/" target="_blank" rel="noopener" aria-label="Instagram de trays_tm (tienda de zapatillas), se abre en otra pestaña"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor" stroke="none"/></svg>@trays_tm</a></div>
   </div>
 </div></section>
 
@@ -872,7 +867,7 @@ addEventListener('load', () => {
       } else revelar(cajas, .12);
 
       // 6. Capturas, pasos y formulario: aparecen al llegar
-      revelar('.caps .cap', .12); // referencias: siempre a la vista (son botones)
+      if (CEL) apilar('#mensajes', document.querySelector('.caps'), gsap.utils.toArray('.caps .cap')); else revelar('.caps .cap', .12);
       revelar('.steps li', .1);
       gsap.from('.qf', {scale: .94, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: {trigger: '.qf', start: 'top 88%'}});
 
