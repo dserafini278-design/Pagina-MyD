@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<title>Postulaciones · Seraltby</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Ctext x='32' y='46' font-family='Arial Black,Arial,sans-serif' font-weight='900' font-size='40' text-anchor='middle' fill='%23f2f2ef'%3ES%3C/text%3E%3C/svg%3E">
+
+<meta name="color-scheme" content="dark">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@88..125,400..900&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#000;--card:#0f0f10;--card2:#17171a;--tx:#f2f2ef;--mut:#8b8b8f;--dim:#3a3a3e;--bd:#232326;--ac:#4d7cff;--sel:rgba(77,124,255,.12);
+--alta:#5fd08a;--media:#e0b45a;--baja:#8b8b8f;--late:#ff7a6b;
+--sans:"Archivo",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;--serif:"Instrument Serif",Georgia,serif;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+::selection{background:var(--sel)}
+button,select,input,textarea,a{touch-action:manipulation}
+.w{max-width:920px;margin:0 auto;padding:28px 18px 72px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+.brand{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6c6c72}
+h1{font-size:clamp(34px,6vw,56px);line-height:.98;letter-spacing:-.035em;font-weight:800;font-stretch:88%;margin:6px 0 0}
+h2{font-size:20px;letter-spacing:-.02em;font-weight:700;font-stretch:88%;margin:0}
+.btn{font:inherit;font-size:14px;font-weight:600;color:var(--tx);background:var(--card2);border:1px solid var(--bd);border-radius:10px;padding:10px 18px;cursor:pointer;min-height:42px}
+.btn:active{transform:scale(.97)}
+@media (hover:hover){.btn:hover{border-color:var(--dim)}}
+
+/* Resumen */
+.res{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px;margin-bottom:26px}
+.res-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:18px;margin:0 0 20px}
+.nums b{display:block;font-size:40px;line-height:1;font-weight:800;font-stretch:88%;letter-spacing:-.03em}
+.nums span{color:var(--mut);font-size:13px}
+.orig{display:grid;gap:9px;font-size:14px}
+.orig div{display:grid;grid-template-columns:140px 1fr 34px;align-items:center;gap:12px}
+.orig i{display:block;height:6px;background:var(--ac);border-radius:3px;min-width:3px}
+.orig em{font-style:normal;text-align:right;color:var(--mut)}
+.k{color:var(--mut);font-size:13px;margin:0}
+
+/* Filtros */
+.tabs{display:flex;gap:4px 20px;flex-wrap:wrap;border-bottom:1px solid var(--bd);margin-bottom:16px}
+.tab{font:inherit;font-size:15px;background:none;border:0;border-bottom:2px solid transparent;margin-bottom:-1px;padding:9px 0;color:var(--mut);cursor:pointer}
+.tab.on{color:var(--tx);border-bottom-color:var(--ac);font-weight:600}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.tools input{flex:1 1 240px}
+input,select,textarea{font:inherit;font-size:16px;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:10px 12px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac)}
+select{cursor:pointer}
+
+/* Postulaciones */
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px;margin-bottom:14px}
+.head{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap;align-items:baseline}
+.name{font-size:24px;line-height:1.1;font-weight:700;letter-spacing:-.02em;font-stretch:92%}
+.right{display:flex;gap:14px;font-size:13px;font-weight:600}
+.p-Alta{color:var(--alta)}.p-Media{color:var(--media)}.p-Baja{color:var(--baja)}
+.e-Nueva{color:var(--media)}.e-Contactada{color:var(--ac)}.e-Llamada-agendada{color:#9db5ff}.e-Cliente{color:var(--alta)}.e-Descartada{color:var(--baja)}
+.meta{color:var(--mut);font-size:13.5px;margin-top:4px}
+.late{color:var(--late);font-weight:600}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 10px}
+.tag{font-size:12.5px;border-radius:999px;padding:4px 11px;background:var(--card2);border:1px solid var(--bd);color:#cfcfd2}
+.sit{font-family:var(--serif);font-size:21px;line-height:1.3;white-space:pre-wrap;margin:8px 0 14px;color:#e8e8e4}
+details{border-top:1px solid var(--bd);padding-top:12px}
+summary{cursor:pointer;color:var(--ac);font-size:14px}
+dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:7px 16px;margin:14px 0 0;font-size:14px}
+dt{color:var(--mut)}dd{margin:0;word-break:break-word}
+dd a{color:var(--ac);text-decoration:none}
+.acc{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.acc select{font-size:14px;padding:9px 12px}
+.wa{font-size:14px;font-weight:600;color:#fff;background:var(--ac);border-radius:10px;padding:10px 16px;text-decoration:none}
+.wa:active{transform:scale(.97)}
+textarea{width:100%;margin-top:12px;resize:vertical;min-height:64px;font-size:14px}
+.empty,.msg{color:var(--mut);text-align:center;padding:48px 0}
+.ok{color:var(--alta);font-size:13px}
+.aviso{position:sticky;top:12px;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--ac);color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:16px;font-weight:600;font-size:15px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.aviso button{font:inherit;font-size:13px;color:#fff;background:rgba(255,255,255,.18);border:0;border-radius:8px;padding:7px 12px;cursor:pointer}
+[hidden]{display:none!important}
+.pin{min-height:70vh;display:flex;flex-direction:column;justify-content:center;max-width:380px;margin:0 auto;text-align:left}
+.pin p{color:var(--mut);margin:10px 0 22px}
+.pin input{width:100%;font-size:26px;letter-spacing:.35em;text-align:center;padding:14px}
+.pin .entrar{width:100%;margin-top:12px;font:inherit;font-size:16px;font-weight:600;color:#fff;background:var(--ac);border:0;border-radius:10px;padding:14px;cursor:pointer}
+.pin .entrar:disabled{opacity:.6}
+.pin .err{color:var(--late);font-size:14px;min-height:22px;margin-top:10px}
+.acc-top{display:flex;gap:8px}
+.card.nueva{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+.vivo{color:var(--mut);font-size:12px;margin-top:6px}
+@media (max-width:560px){.w{padding:22px 14px 60px}.res,.card{padding:18px;border-radius:16px}.orig div{grid-template-columns:110px 1fr 30px}dl{grid-template-columns:1fr}dt{margin-top:6px}.nums b{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="w">
+  <form class="pin" id="pin" hidden>
+    <div class="brand">Seraltby / Panel privado</div>
+    <h1>Postulaciones</h1>
+    <p>Ingresá el PIN del panel. Este dispositivo lo va a recordar.</p>
+    <input type="password" id="pinIn" inputmode="numeric" autocomplete="current-password" aria-label="PIN" required>
+    <button class="entrar" id="pinBtn" type="submit">Entrar</button>
+    <div class="err" id="pinErr" role="alert"></div>
+  </form>
+  <div id="app" hidden>
+  <div class="top">
+    <div><div class="brand">Seraltby / Panel privado</div><h1>Postulaciones</h1><div class="vivo" id="vivo"></div></div>
+    <div class="acc-top"><button class="btn" id="recargar" type="button">Actualizar</button><button class="btn" id="salir" type="button">Salir</button></div>
+  </div>
+
+  <section class="res" id="res" hidden>
+    <div class="res-head">
+      <h2>Resumen</h2>
+      <select id="periodo" aria-label="Período del resumen">
+        <option value="mes">Este mes</option><option value="pasado">Mes pasado</option><option value="todo">Desde el principio</option>
+      </select>
+    </div>
+    <div class="nums" id="nums"></div>
+    <p class="k" style="margin-bottom:10px">Cómo nos conocieron</p>
+    <div class="orig" id="orig"></div>
+  </section>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="tools">
+    <input type="search" id="buscar" placeholder="Buscar por negocio, nombre, Instagram o teléfono" aria-label="Buscar">
+    <select id="orden" aria-label="Ordenar">
+      <option value="prio">Primero las de mayor prioridad</option><option value="fecha">Primero las más recientes</option>
+    </select>
+  </div>
+  <div class="aviso" id="aviso" hidden><span id="avisoTxt"></span><button type="button" id="verNuevas">Ver</button></div>
+  <div id="lista"><p class="msg">Cargando…</p></div>
+  </div>
+</div>
+
+<script>
+// Conexión con la planilla a través de Google Apps Script (sin depender de la cuenta de Google del celular)
+const API = 'https://script.google.com/macros/s/AKfycbzKnmZJxJomz_LMCWU7sn2M_wwEi37LShC6j5gXTPYJlGzdfD0Yku7RAYDz1VdrvvBFzQ/exec';
+async function api(a, extra) {
+  const r = await fetch(API, {method: 'POST', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(Object.assign({a}, extra))});
+  if (!r.ok) throw new Error('No se pudo conectar. Revisá tu conexión y tocá Actualizar.');
+  const j = await r.json();
+  if (!j.ok) throw new Error(j.error);
+  return j.data;
+}
+window.google = {script: {get run() {
+  const h = {};
+  const call = (a, x) => api(a, x).then(d => h.s && h.s(d), e => h.f && h.f(e));
+  const o = {withSuccessHandler(f) { h.s = f; return o; }, withFailureHandler(f) { h.f = f; return o; },
+    entrar: pin => call('entrar', {pin}), datos: t => call('datos', {t}),
+    cambiarEstado: (t, fila, estado) => call('estado', {t, fila, estado}), guardarNota: (t, fila, nota) => call('nota', {t, fila, nota})};
+  return o;
+}}};
+</script>
+<script>
+const ESTADOS = ['Nueva', 'Contactada', 'Llamada agendada', 'Cliente', 'Descartada'];
+const DETALLE = ['Nombre', 'WhatsApp', 'Email', 'Instagram', 'Rubro', 'Ubicación', 'Ciudad', 'Cómo le llegan clientes hoy',
+  'Quién maneja las redes', 'Aparecer en cámara', 'Inversión mensual', 'Cuándo quiere empezar', 'Cómo nos conoció'];
+const PESO = {Alta: 3, Media: 2, Baja: 1};
+const DIA = 86400000;
+let todo = [], filtro = 'Nueva', ultimo = 0, nuevas = new Set();
+const CADA = 60000; // revisa si hay postulaciones nuevas cada 1 minuto
+
+const $ = id => document.getElementById(id);
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+const palabras = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9@._\s]/g, ' ').split(/\s+/).filter(Boolean);
+
+function wa(n) {
+  let x = String(n || '').replace(/\D/g, '').replace(/^0/, '');
+  if (x.length < 8) return '';
+  if (!x.startsWith('54')) x = '549' + x;
+  return 'https://wa.me/' + x;
+}
+function waMensaje(c) {
+  const base = wa(c.WhatsApp);
+  if (!base) return '';
+  const nombre = String(c.Nombre || '').trim().split(/\s+/)[0];
+  const t = 'Hola' + (nombre ? ' ' + nombre : '') + ', ¿cómo estás? Somos Dante y Marcos de Seraltby. Recibimos la postulación' +
+    (c.Negocio ? ' de ' + c.Negocio : '') + ' desde nuestra página y nos gustaría coordinar una llamada breve para conocerte mejor. ¿Qué día y horario te queda cómodo?';
+  return base + '?text=' + encodeURIComponent(t);
+}
+function instagram(v) {
+  const u = String(v || '').trim().replace(/^@/, '').replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').replace(/[/?].*$/, '');
+  return /^[a-z0-9._]{1,30}$/i.test(u) ? 'https://instagram.com/' + u : '';
+}
+
+function sinResponder(c) {
+  if (c.Estado !== 'Nueva' || !c.ts) return '';
+  const d = Math.floor((Date.now() - c.ts) / DIA);
+  return d >= 1 ? 'Sin responder hace ' + d + (d === 1 ? ' día' : ' días') : '';
+}
+
+const origen = v => /instagram/i.test(v) ? 'Instagram' : /recomend/i.test(v) ? 'Recomendación' : /google/i.test(v) ? 'Google' : v ? 'Otro' : 'Sin dato';
+
+function cargar(solo) {
+  if (!solo) $('lista').innerHTML = '<p class="msg">Cargando…</p>';
+  google.script.run
+    .withSuccessHandler(d => {
+      d.forEach(c => { if (!PESO[c.Prioridad]) c.Prioridad = 'Baja'; c.p = PESO[c.Prioridad]; });
+      const max = Math.max(0, ...d.map(c => c.ts));
+      if (ultimo) d.filter(c => c.ts > ultimo).forEach(c => nuevas.add(c.fila));
+      ultimo = Math.max(ultimo, max);
+      todo = d; avisar(); pintar();
+      $('vivo').textContent = 'Se actualiza solo · última revisión ' + new Date().toLocaleTimeString('es-AR', {hour: '2-digit', minute: '2-digit'});
+    })
+    .withFailureHandler(e => { if (/NO_AUTORIZADO/.test(e.message)) return pedirPin('El PIN cambió. Ingresá el nuevo.'); if (solo) return; $('res').hidden = true; $('tabs').innerHTML = ''; $('lista').innerHTML = ''; $('lista').append(el('p', 'msg', String(e.message).replace(/^Error:\s*/, ''))); })
+    .datos(TOKEN);
+}
+
+function resumen() {
+  const hoy = new Date(), per = $('periodo').value;
+  const ini = per === 'mes' ? new Date(hoy.getFullYear(), hoy.getMonth(), 1) : per === 'pasado' ? new Date(hoy.getFullYear(), hoy.getMonth() - 1, 1) : new Date(0);
+  const fin = per === 'pasado' ? new Date(hoy.getFullYear(), hoy.getMonth(), 1) : new Date(8.64e15);
+  const vs = todo.filter(c => c.ts >= ini.getTime() && c.ts < fin.getTime());
+  const clientes = vs.filter(c => c.Estado === 'Cliente').length;
+  const nums = $('nums'); nums.innerHTML = '';
+  [[vs.length, 'postulaciones recibidas'], [vs.filter(c => c.Prioridad === 'Alta').length, 'de prioridad alta'], [clientes, 'se hicieron clientes'],
+   [todo.filter(c => c.Estado === 'Nueva').length, 'esperan respuesta (en total)']]
+    .forEach(([n, t]) => { const d = el('div'); d.append(el('b', null, n), el('span', null, t)); nums.append(d); });
+  const cuenta = {};
+  vs.forEach(c => { const o = origen(c['Cómo nos conoció']); cuenta[o] = (cuenta[o] || 0) + 1; });
+  const orig = $('orig'); orig.innerHTML = '';
+  const filas = Object.entries(cuenta).sort((a, b) => b[1] - a[1]);
+  if (!filas.length) orig.append(el('p', 'k', 'Todavía no hay postulaciones en este período.'));
+  filas.forEach(([o, n]) => {
+    const d = el('div'), barra = el('i');
+    barra.style.width = Math.round(n / vs.length * 100) + '%';
+    const cont = el('span'); cont.append(barra);
+    d.append(el('span', null, o), cont, el('em', null, n));
+    orig.append(d);
+  });
+  $('res').hidden = false;
+}
+
+function pintar() {
+  resumen();
+  const tabs = $('tabs'); tabs.innerHTML = '';
+  ['Todas', ...ESTADOS].forEach(e => {
+    const n = e === 'Todas' ? todo.length : todo.filter(c => c.Estado === e).length;
+    const b = el('button', 'tab' + (filtro === e ? ' on' : ''), e + ' (' + n + ')');
+    b.type = 'button';
+    b.onclick = () => { filtro = e; pintar(); };
+    tabs.append(b);
+  });
+
+  const q = palabras($('buscar').value).join(' '), qn = $('buscar').value.replace(/\D/g, '');
+  const ver = todo.filter(c => filtro === 'Todas' || c.Estado === filtro).filter(c => {
+    if (!q && !qn) return true;
+    const texto = palabras([c.Negocio, c.Nombre, c.Email, c.Instagram, c.Ciudad, c.Rubro].join(' ')).join(' ');
+    return (q && texto.includes(q)) || (qn.length >= 3 && String(c.WhatsApp).replace(/\D/g, '').includes(qn));
+  });
+  if ($('orden').value === 'prio') ver.sort((a, b) => b.p - a.p || b.ts - a.ts); else ver.sort((a, b) => b.ts - a.ts);
+
+  const lista = $('lista'); lista.innerHTML = '';
+  if (!ver.length) return lista.append(el('p', 'empty', q || qn ? 'No hay postulaciones que coincidan con la búsqueda.' : 'No hay postulaciones en esta sección.'));
+
+  ver.forEach(c => {
+    const card = el('div', 'card' + (nuevas.has(c.fila) ? ' nueva' : ''));
+    const head = el('div', 'head');
+    head.append(el('div', 'name', c.Negocio || 'Sin nombre'));
+    const right = el('div', 'right');
+    right.append(el('span', 'p-' + c.Prioridad, 'Prioridad ' + c.Prioridad.toLowerCase()), el('span', 'e-' + String(c.Estado).replace(/ /g, '-'), c.Estado));
+    head.append(right);
+    card.append(head);
+
+    const lugar = c.Ciudad || c['Ubicación'];
+    const meta = el('div', 'meta', [c.Nombre, c.Fecha, lugar].filter(Boolean).join(' · '));
+    const late = sinResponder(c);
+    if (late) { meta.append(document.createTextNode(' · ')); meta.append(el('span', 'late', late)); }
+    card.append(meta);
+
+    const tags = el('div', 'tags');
+    [c.Rubro, c['Inversión mensual'], c['Cuándo quiere empezar'], c['Aparecer en cámara']].filter(Boolean).forEach(t => tags.append(el('span', 'tag', t)));
+    card.append(tags);
+    if (c['Qué quiere lograr en 6 meses']) card.append(el('div', 'sit', c['Qué quiere lograr en 6 meses']));
+
+    const det = el('details');
+    det.append(el('summary', null, 'Ver todas las respuestas'));
+    const dl = el('dl');
+    DETALLE.forEach(k => {
+      if (!c[k]) return;
+      const dd = el('dd');
+      const ig = k === 'Instagram' && instagram(c[k]);
+      if (ig) { const a = el('a', null, c[k]); a.href = ig; a.target = '_blank'; a.rel = 'noopener'; dd.append(a); } else dd.textContent = c[k];
+      dl.append(el('dt', null, k), dd);
+    });
+    det.append(dl);
+    card.append(det);
+
+    const acc = el('div', 'acc');
+    const ok = el('span', 'ok');
+    const guardarEstado = (estado, aviso) => google.script.run
+      .withSuccessHandler(() => { c.Estado = estado; ok.textContent = aviso; setTimeout(pintar, 900); })
+      .withFailureHandler(e => { ok.textContent = 'Error: ' + e.message; })
+      .cambiarEstado(TOKEN, c.fila, estado);
+    const link = waMensaje(c);
+    if (link) {
+      const a = el('a', 'wa', 'Escribir por WhatsApp');
+      a.href = link; a.target = '_blank'; a.rel = 'noopener';
+      a.onclick = () => { if (c.Estado === 'Nueva') guardarEstado('Contactada', 'Marcada como contactada'); };
+      acc.append(a);
+    }
+    const sel = el('select');
+    sel.setAttribute('aria-label', 'Estado de la postulación');
+    ESTADOS.forEach(e => sel.add(new Option(e, e, false, e === c.Estado)));
+    sel.onchange = () => guardarEstado(sel.value, 'Guardado');
+    acc.append(sel, ok);
+    card.append(acc);
+
+    const nota = el('textarea');
+    nota.placeholder = 'Nuestras notas sobre este negocio';
+    nota.value = c['Nuestras notas'] || '';
+    nota.setAttribute('aria-label', 'Notas');
+    nota.onchange = () => google.script.run
+      .withSuccessHandler(() => { c['Nuestras notas'] = nota.value; ok.textContent = 'Nota guardada'; })
+      .withFailureHandler(e => { ok.textContent = 'Error: ' + e.message; })
+      .guardarNota(TOKEN, c.fila, nota.value);
+    card.append(nota);
+    lista.append(card);
+  });
+}
+// Aviso de postulaciones nuevas: cartel arriba, contador en la pestaña y tarjeta resaltada
+function avisar() {
+  const n = nuevas.size;
+  document.title = (n ? '(' + n + ') ' : '') + 'Postulaciones · Seraltby';
+  $('aviso').hidden = !n;
+  if (n) {
+    const nombres = todo.filter(c => nuevas.has(c.fila)).map(c => c.Negocio || 'sin nombre');
+    $('avisoTxt').textContent = n === 1 ? 'Llegó una postulación nueva: ' + nombres[0] : 'Llegaron ' + n + ' postulaciones nuevas';
+  }
+}
+$('verNuevas').onclick = () => { filtro = 'Nueva'; $('orden').value = 'fecha'; pintar(); scrollTo({top: $('tabs').offsetTop - 10, behavior: 'smooth'}); setTimeout(() => { nuevas.clear(); avisar(); }, 6000); };
+const ocupado = () => { const a = document.activeElement; return a && /TEXTAREA|SELECT|INPUT/.test(a.tagName); };
+setInterval(() => { if (TOKEN && !document.hidden && !ocupado()) cargar(true); }, CADA);
+document.addEventListener('visibilitychange', () => { if (TOKEN && !document.hidden && !ocupado()) cargar(true); });
+$('recargar').onclick = () => cargar();
+$('periodo').onchange = resumen;
+$('orden').onchange = pintar;
+let espera;
+$('buscar').oninput = () => { clearTimeout(espera); espera = setTimeout(pintar, 200); };
+// Acceso con PIN: el dispositivo guarda una llave (no el PIN). Si el PIN cambia, la llave deja de servir.
+const LLAVE = 'seraltby-panel';
+let TOKEN = '';
+try { TOKEN = localStorage.getItem(LLAVE) || ''; } catch (_) {}
+function pedirPin(msg) {
+  TOKEN = ''; try { localStorage.removeItem(LLAVE); } catch (_) {}
+  $('app').hidden = true; $('pin').hidden = false; $('pinErr').textContent = msg || ''; $('pinIn').value = ''; $('pinIn').focus();
+}
+function abrir() { $('pin').hidden = true; $('app').hidden = false; cargar(); }
+$('pin').onsubmit = ev => {
+  ev.preventDefault();
+  const b = $('pinBtn'); b.disabled = true; b.textContent = 'Entrando…'; $('pinErr').textContent = '';
+  google.script.run
+    .withSuccessHandler(t => { TOKEN = t; try { localStorage.setItem(LLAVE, t); } catch (_) {} b.disabled = false; b.textContent = 'Entrar'; abrir(); })
+    .withFailureHandler(e => { b.disabled = false; b.textContent = 'Entrar'; $('pinErr').textContent = String(e.message).replace(/^Error:\s*/, ''); $('pinIn').select(); })
+    .entrar($('pinIn').value);
+};
+$('salir').onclick = () => pedirPin('Saliste del panel en este dispositivo.');
+if (TOKEN) abrir(); else pedirPin();
+</script>
+</body>
+</html>
